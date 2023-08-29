@@ -24,9 +24,14 @@ function TreeNode(value, left = null, right = null) {
 function Tree() {
     let root = null;
     
+    function processData(arr) {
+        const sortedArr = arr.sort((a, b) => a - b);
+        return [... new Set(sortedArr)];
+    }
+
     function buildTree(dataList) {
         // process list 
-        const psList = dataList;
+        const psList = processData(dataList);
 
         function construct(start, end) {
             if (start > end) return null;
@@ -81,7 +86,7 @@ function Tree() {
     }
     
     // Code provided by Odin Project 
-
+    // https://www.theodinproject.com/lessons/javascript-binary-search-trees
     function prettyPrint(node, prefix = "", isLeft = true) {
         if (node === null) {
             return;
@@ -119,5 +124,5 @@ function Tree() {
 }
 
 const t = Tree();
-t.buildTree([1, 2, 3, 4, 5, 6]);
+t.buildTree([10, 5, 6, -1, 1, 2, 2, 2, 3, 4, 5, 6]);
 t.printTree();
