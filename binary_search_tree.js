@@ -4,8 +4,8 @@ function TreeNode(value, left = null, right = null) {
     let rightNode = right;
     
     function getData()  { return data }
-    function getLeft()  { return left }
-    function getRight() { return right }
+    function getLeft()  { return leftNode }
+    function getRight() { return rightNode }
 
     function setData(value) { data = value }
     function setRight(node) { rightNode = node }
@@ -76,6 +76,31 @@ function Tree() {
     function rebalance() {
     }
 
+    function printTree() {
+        prettyPrint(root);
+    }
+    
+    // Code provided by Odin Project 
+
+    function prettyPrint(node, prefix = "", isLeft = true) {
+        if (node === null) {
+            return;
+        }
+
+        const rightNode = node.getRight();
+        const leftNode = node.getLeft();
+
+        if (rightNode !== null) {
+            prettyPrint(rightNode, `${prefix}${isLeft ? "│   " : "    "}`, false);
+        }
+
+        console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.getData()}`);
+
+        if (leftNode !== null) {
+            prettyPrint(leftNode, `${prefix}${isLeft ? "    " : "│   "}`, true);
+        }
+    }
+
     return {
        buildTree,
        insert,
@@ -89,8 +114,10 @@ function Tree() {
        depth,
        isBalanced,
        rebalance,
+       printTree,
     }
 }
 
 const t = Tree();
-t.buildTree([1, 2, 3, 4, 5, 6])
+t.buildTree([1, 2, 3, 4, 5, 6]);
+t.printTree();
