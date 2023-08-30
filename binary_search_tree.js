@@ -78,7 +78,50 @@ function Tree() {
         insertRec(root);
     } 
 
-    function remove(data) {
+    function remove(value) {
+        function removeRec(node, data) {
+            if (node == null) return node  
+
+            if (node.getData() > data) {
+                node.setLeft(removeRec(node.getLeft(), data));
+                return node;
+            }
+
+            if (node.getData() < data) {
+               node.setRight(removeRec(node.getRight(), data)); 
+               return node;
+            }
+
+            if (node.getLeft() == null) {
+                const child = node.getRight();
+                return child;
+            }
+
+            if (node.getRight() == null) {
+                const child = node.getLeft();
+                return child;
+            }
+
+            let parent = node;
+            let subs = node.getRight();
+
+            while (subs.getLeft() !== null) {
+                parent = subs;
+                subs = subs.getLeft();
+            }
+            
+            if (parent === node) {
+                parent.setRight(subs.getRight());
+            } else {
+                parent.setLeft(subs.getRight());
+            }
+
+            node.setData(subs.getData());
+
+            return node;
+        }
+
+        root = removeRec(root, value);
     }
 
     function find(data) {
@@ -153,5 +196,11 @@ function Tree() {
 const t = Tree();
 t.buildTree([10, 5, 6, -1, 1, 2, 2, 2, 3, 4, 5, 6]);
 t.insert(100);
+t.insert(16)
+t.insert(105);
 t.insert(7);
 t.printTree();
+t.remove(6);
+t.printTree();
+
+
