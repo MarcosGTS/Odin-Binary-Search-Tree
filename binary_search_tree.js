@@ -49,6 +49,33 @@ function Tree() {
     }
 
     function insert(data) {
+        const newNode = TreeNode(data);
+
+        function insertRec(node) {
+            if (root == null) root = node;
+
+            const nodeData = node.getData();
+
+            if (data < nodeData) {
+                const left = node.getLeft();
+                if (left) {
+                    insertRec(left);
+                } else {
+                    node.setLeft(newNode);
+                }
+            }
+
+            if (data > nodeData) {
+                const right = node.getRight();
+                if (right) {
+                    insertRec(right);
+                } else {
+                    node.setRight(newNode);
+                }
+            }
+        }
+
+        insertRec(root);
     } 
 
     function remove(data) {
@@ -125,4 +152,6 @@ function Tree() {
 
 const t = Tree();
 t.buildTree([10, 5, 6, -1, 1, 2, 2, 2, 3, 4, 5, 6]);
+t.insert(100);
+t.insert(7);
 t.printTree();
