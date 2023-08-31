@@ -128,6 +128,20 @@ function Tree() {
     }
 
     function levelOrder() {
+
+        let result = "";
+        const query = [root]
+
+        while (query.length != 0) {
+            const node = query.shift();
+
+            if (node.getLeft()) query.push(node.getLeft());
+            if (node.getRight()) query.push(node.getRight());
+
+            result += `${node.getData()} `;
+        }
+
+        return result;
     }
 
     function inorder() {
@@ -204,4 +218,5 @@ t.remove(6);
 t.printTree();
 console.log(t.find(105).getData());
 
+console.log(t.levelOrder());
 
