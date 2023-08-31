@@ -145,12 +145,54 @@ function Tree() {
     }
 
     function inorder() {
+
+        let result = ""; 
+
+        function inorderRec(node) {
+            if (node === null) return;
+
+            inorderRec(node.getLeft());
+            result += `${node.getData()} `;
+            inorderRec(node.getRight());
+        } 
+
+        inorderRec(root);
+
+        return result;
     }
 
     function preorder() {
+ 
+        let result = ""; 
+
+        function preorderRec(node) {
+            if (node === null) return;
+
+            result += `${node.getData()} `;
+            preorderRec(node.getLeft());
+            preorderRec(node.getRight());
+        } 
+
+        preorderRec(root);
+
+        return result;   
     }
 
     function postorder() {
+  
+        let result = ""; 
+
+        function postorderRec(node) {
+            if (node === null) return;
+
+            postorderRec(node.getLeft());
+            postorderRec(node.getRight());
+            result += `${node.getData()} `;
+        } 
+
+        postorderRec(root);
+
+        return result;      
     }
 
     function hight() {
@@ -219,4 +261,6 @@ t.printTree();
 console.log(t.find(105).getData());
 
 console.log(t.levelOrder());
-
+console.log(t.inorder());
+console.log(t.preorder());
+console.log(t.postorder());
