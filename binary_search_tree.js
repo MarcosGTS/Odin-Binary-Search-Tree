@@ -49,8 +49,7 @@ function Tree() {
     }
 
     function insert(data) {
-        const newNode = TreeNode(data);
-
+        const newNode = TreeNode(data); 
         function insertRec(node) {
             if (root == null) root = node;
 
@@ -125,6 +124,16 @@ function Tree() {
     }
 
     function find(data) {
+        
+        function findRec(node) {
+            if (node === null) return node;
+            if (data < node.getData()) return findRec(node.getLeft()); 
+            if (data > node.getData()) return findRec(node.getRight());
+
+            return node;
+        }
+
+        return findRec(root);
     }
 
     function levelOrder() {
@@ -202,5 +211,6 @@ t.insert(7);
 t.printTree();
 t.remove(6);
 t.printTree();
+console.log(t.find(105).getData());
 
 
