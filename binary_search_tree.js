@@ -231,6 +231,22 @@ function Tree() {
     }
 
     function isBalanced() {
+
+        function isBalancedRec(node) {
+            if (node === null) return 0;
+            
+            const heightL = isBalancedRec(node.getLeft());
+            if (heightL < 0) return -1;
+            
+            const heightR = isBalancedRec(node.getRight());
+            if (heightR < 0) return -1;
+
+            if (Math.abs(heightL - heightR) > 1) return -1; 
+            
+            return Math.max(heightL, heightR) + 1;
+        }
+
+        return isBalancedRec(root) >= 0;
     }
 
     function rebalance() {
@@ -242,8 +258,7 @@ function Tree() {
     
     // Code provided by Odin Project 
     // https://www.theodinproject.com/lessons/javascript-binary-search-trees
-    function prettyPrint(node, prefix = "", isLeft = true) {
-        if (node === null) {
+    function prettyPrint(node, prefix = "", isLeft = true) { if (node === null) {
             return;
         }
 
@@ -280,6 +295,7 @@ function Tree() {
 
 const t = Tree();
 t.buildTree([10, 5, 6, -1, 1, 2, 2, 2, 3, 4, 5, 6]);
+console.log(t.isBalanced())
 t.insert(100);
 t.insert(16)
 t.insert(105);
@@ -296,3 +312,4 @@ console.log(t.postorder());
 
 console.log(t.hight());
 console.log(t.depth(t.find(105)));
+console.log(t.isBalanced())
