@@ -49,32 +49,23 @@ function Tree() {
     }
 
     function insert(data) {
-        const newNode = TreeNode(data); 
         function insertRec(node) {
-            if (root == null) root = node;
+            if (node == null) return TreeNode(data);
 
-            const nodeData = node.getData();
-
-            if (data < nodeData) {
-                const left = node.getLeft();
-                if (left) {
-                    insertRec(left);
-                } else {
-                    node.setLeft(newNode);
-                }
+            if (data < node.getData()) {
+                const leftNode = insertRec(node.getLeft()); 
+                node.setLeft(leftNode);
             }
 
-            if (data > nodeData) {
-                const right = node.getRight();
-                if (right) {
-                    insertRec(right);
-                } else {
-                    node.setRight(newNode);
-                }
+            if (data > node.getData()) {
+                const rightNode = insertRec(node.getRight()); 
+                node.setRight(rightNode);
             }
+
+            return node;
         }
 
-        insertRec(root);
+       root = insertRec(root); 
     } 
 
     function remove(value) {
