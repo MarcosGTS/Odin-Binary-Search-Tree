@@ -141,7 +141,7 @@ function Tree() {
             result += `${node.getData()} `;
         }
 
-        return result;
+        return result.trim();
     }
 
     function inorder() {
@@ -158,7 +158,7 @@ function Tree() {
 
         inorderRec(root);
 
-        return result;
+        return result.trim();
     }
 
     function preorder() {
@@ -175,7 +175,7 @@ function Tree() {
 
         preorderRec(root);
 
-        return result;   
+        return result.trim();   
     }
 
     function postorder() {
@@ -192,7 +192,7 @@ function Tree() {
 
         postorderRec(root);
 
-        return result;      
+        return result.trim();      
     }
 
     function hight() {
@@ -250,6 +250,12 @@ function Tree() {
     }
 
     function rebalance() {
+        if (isBalanced()) return;
+
+        const dataList = inorder().split(" ");
+
+        console.log(dataList);
+        buildTree(dataList);
     }
 
     function printTree() {
@@ -313,3 +319,5 @@ console.log(t.postorder());
 console.log(t.hight());
 console.log(t.depth(t.find(105)));
 console.log(t.isBalanced())
+t.rebalance()
+t.printTree();
