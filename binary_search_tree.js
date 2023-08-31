@@ -196,9 +196,38 @@ function Tree() {
     }
 
     function hight() {
+        
+        function hightRec(node) {
+            if (node === null) return 0;
+            
+            const heightL = hightRec(node.getLeft());
+            const heightR = hightRec(node.getRight());
+
+            return 1 + Math.max(heightL, heightR);
+        }
+
+        return hightRec(root);
     }
 
-    function depth() {
+    function depth(target) {
+
+        const data = target.getData();
+
+        function depthRec(node) {
+            if (node === null) return null; 
+            
+            if (target === node) return 0;
+
+            if (data < node.getData()) {
+                return 1 + depthRec(node.getLeft());
+            }
+
+            if (data > node.getData()) {
+                return 1 + depthRec(node.getRight());
+            }   
+        }
+
+        return depthRec(root);
     }
 
     function isBalanced() {
@@ -264,3 +293,6 @@ console.log(t.levelOrder());
 console.log(t.inorder());
 console.log(t.preorder());
 console.log(t.postorder());
+
+console.log(t.hight());
+console.log(t.depth(t.find(105)));
