@@ -254,7 +254,6 @@ function Tree() {
 
         const dataList = inorder().split(" ");
 
-        console.log(dataList);
         buildTree(dataList);
     }
 
@@ -299,25 +298,41 @@ function Tree() {
     }
 }
 
+
+function createRandomList(length, max = 100, min = 0) {
+    const result = [];
+    for (let i = 0; i < length; i++) {
+        const randomNum = Math.floor(min + Math.random() * (max - min));
+        result.push(randomNum);
+    }
+
+    return result;
+}
+
 const t = Tree();
-t.buildTree([10, 5, 6, -1, 1, 2, 2, 2, 3, 4, 5, 6]);
-console.log(t.isBalanced())
-t.insert(100);
-t.insert(16)
-t.insert(105);
-t.insert(7);
-t.printTree();
-t.remove(6);
-t.printTree();
-console.log(t.find(105).getData());
+t.buildTree(createRandomList(15));
 
-console.log(t.levelOrder());
-console.log(t.inorder());
-console.log(t.preorder());
-console.log(t.postorder());
+console.log("Level Order => ", t.levelOrder());
+console.log("Balanced    => ", t.isBalanced());
+console.log("Preorder    => ", t.preorder());
+console.log("Inorder     => ", t.inorder());
+console.log("Postorder   => ", t.postorder());
 
-console.log(t.hight());
-console.log(t.depth(t.find(105)));
-console.log(t.isBalanced())
-t.rebalance()
+// Adding 15 values
+console.log("Adding elements...");
+for (let value of createRandomList(15, 200, 100)) {
+    t.insert(value);
+}
+
+console.log("Balanced  => ", t.isBalanced());
+console.log("Rebalacing...");
+t.rebalance();
+console.log("Balanced  => ", t.isBalanced());
+
+console.log("Level Order => ", t.levelOrder());
+console.log("Balanced    => ", t.isBalanced());
+console.log("Preorder    => ", t.preorder());
+console.log("Inorder     => ", t.inorder());
+console.log("Postorder   => ", t.postorder());
+
 t.printTree();
